@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <title>Create clickable links in your browser!</title>
+    <script>
+      let counter = 0;
+      
+      function handleAddURLClick(element) {
+          const linkID = "link" + counter;
+      
+          const linkValue = document.getElementById("link-entry").value;
+          const newLinkListEntryA = document.createElement("a");
+          newLinkListEntryA.setAttribute("href", linkValue);
+          newLinkListEntryA.appendChild(document.createTextNode(linkValue));
+      
+          const newLinkListEntryButton = document.createElement("button");
+          newLinkListEntryButton.setAttribute("onclick", "nukeElement('" + linkID + "')");
+          newLinkListEntryButton.appendChild(document.createTextNode("Delete"));
+      
+          const newLinkListEntryLi = document.createElement("li");
+          newLinkListEntryLi.setAttribute("id", linkID);
+          newLinkListEntryLi.appendChild(newLinkListEntryA);
+          newLinkListEntryLi.appendChild(document.createTextNode(" "));
+          newLinkListEntryLi.appendChild(newLinkListEntryButton);
+      
+          document.getElementById("links").appendChild(newLinkListEntryLi);
+      
+          counter++;
+      }
+      
+      function nukeElement(id) {
+          document.getElementById(id).remove();
+      }
+    </script>
+  </head>
+  <body>
+    <main>
+      <label for="link-entry">Enter URL:</label>
+      <input type="url" id="link-entry" name="link-entry">
+      <button type="button" onclick="handleAddURLClick(this)">Add URL to the list</button>
+      <nav>
+        <ul id="links">
+        </ul>
+      </nav>
+    </main>
+  </body>
+</html>
